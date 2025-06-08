@@ -17,6 +17,7 @@ class HuggingfaceModel:
         system_prompt: str = None,
         thinking: bool = False,
         max_new_tokens: int = 32768,
+        temperature: float = 0.1,
     ):
         with torch.no_grad():
             messages = (
@@ -33,7 +34,7 @@ class HuggingfaceModel:
                 self.model.device
             )
             model_outputs = self.model.generate(
-                **model_inputs, max_new_tokens=max_new_tokens
+                **model_inputs, max_new_tokens=max_new_tokens, temperature=temperature
             )
             output_ids = model_outputs[0][len(model_inputs.input_ids[0]) :].tolist()
             response = self.tokenizer.decode(
