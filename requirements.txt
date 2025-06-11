@@ -2,9 +2,12 @@
 torch
 torchvision
 torchaudio
+tensorboard
 transformers
+datasets
 accelerate
 protobuf
 deepspeed
 jupyterlab
 ipywidgets
+trl
