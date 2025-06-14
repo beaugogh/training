@@ -6,8 +6,10 @@ tensorboard
 transformers
 datasets
 accelerate
+peft
 protobuf
 deepspeed
 jupyterlab
 ipywidgets
 trl
+bitsandbytes

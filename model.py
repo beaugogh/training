@@ -15,21 +15,24 @@ class HuggingfaceModel:
         self,
         prompt: str,
         system_prompt: str = None,
-        thinking: bool = False,
         max_new_tokens: int = 32768,
         temperature: float = 0.1,
+        appy_chat_template: bool = True,
+        enable_thinking: bool = True,
     ):
         with torch.no_grad():
-            messages = (
-                [{"role": "system", "content": system_prompt}] if system_prompt else []
-            )
-            messages.append({"role": "user", "content": prompt})
-            input_text = self.tokenizer.apply_chat_template(
-                messages,
-                tokenize=False,
-                add_generation_prompt=True,
-                enable_thinking=thinking,  # Switches between thinking and non-thinking modes. Default is True.
-            )
+            input_text = prompt
+            if appy_chat_template:
+                messages = (
+                    [{"role": "system", "content": system_prompt}] if system_prompt else []
+                )
+                messages.append({"role": "user", "content": prompt})
+                input_text = self.tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=False,
+                    add_generation_prompt=True,
+                    enable_thinking=enable_thinking,  # Switches between thinking and non-thinking modes. Default is True.
+                )
             model_inputs = self.tokenizer([input_text], return_tensors="pt").to(
                 self.model.device
             )
