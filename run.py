@@ -1,3 +1,5 @@
+import os
+import sys
 import torch
 from trl import SFTTrainer, SFTConfig
 from datasets import load_dataset
@@ -9,6 +11,7 @@ from transformers import (
 )
 from peft import LoraConfig
 from transformers import TrainingArguments
+from utils import save_jsonl
 
 
 def main():
@@ -29,4 +32,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()        
